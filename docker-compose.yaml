@@ -1,0 +1,45 @@
+﻿version: "3"
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_NAME=glancefy_db
+      - DB_USER=glancefy_user
+      - DB_PASSWORD=glancefy_password
+      - DB_HOST=db
+      - DB_PORT=5432
+    depends_on:
+      - db
+      - redis
+  db:
+    image: postgres:14
+    environment:
+      - POSTGRES_DB=glancefy_db
+      - POSTGRES_USER=glancefy_user
+      - POSTGRES_PASSWORD=glancefy_password
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis:6
+  celery:
+    build: .
+    command: celery -A glancefy worker -l info
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+  celery-beat:
+    build: .
+    command: celery -A glancefy beat -l info
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
