@@ -54,10 +54,12 @@ For full API documentation, visit `/api/docs/` when the server is running.
 
 ## Tech Stack
 
-- Python 3.9+
-- Django 4.2+
-- Django REST Framework 3.14+
+- Python 3.11.9
+- Django 5.1
+- Django REST Framework 3.15.2
 - PostgreSQL 14+
+- celery 5.2.3
+- redis 4.5.4
 - Docker & Docker Compose
 
 ## Contributing
