@@ -2,6 +2,10 @@
 
 This Django-based API serves as the backend for Glancefy, an AI-driven automated news aggregation platform.
 
+## Project initial architecture diagram
+
+![Architecture diagram](images/image.png)
+
 ## Setup
 
 1. Clone the repository:
